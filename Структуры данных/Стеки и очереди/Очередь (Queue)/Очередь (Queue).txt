@@ -1,0 +1,59 @@
+Очередь (Queue):
+
+Очередь - это структура данных, в которой элементы добавляются 
+с одного конца (называемого "хвостом") и удаляются с другого 
+конца (называемого "головой"). Принцип "первый вошел, первый вышел" 
+(First-In, First-Out, FIFO). Очереди широко используются в задачах 
+управления ресурсами, обработке задач по порядку и других контекстах.
+
+
+код:
+    from collections import deque
+
+    class Queue:
+        def __init__(self):
+            self.items = deque()
+
+        def enqueue(self, item):
+            self.items.append(item)
+
+        def dequeue(self):
+            if not self.is_empty():
+                return self.items.popleft()
+
+        def is_empty(self):
+            return len(self.items) == 0
+
+        def peek(self):
+            if not self.is_empty():
+                return self.items[0]
+
+        def size(self):
+            return len(self.items)
+
+    # Пример использования
+    queue = Queue()
+    queue.enqueue(1)
+    queue.enqueue(2)
+    queue.enqueue(3)
+    print(queue.dequeue())  # Вывод: 1
+
+
+Объяснение:
+
+from collections import deque: Импорт класса deque из модуля collections для эффективных операций добавления и удаления элементов из начала очереди.
+class Queue:: Определение класса Queue.
+def __init__(self):: Метод инициализации объекта класса (конструктор), создающий пустую очередь.
+self.items = deque(): Создание объекта deque для хранения элементов очереди.
+def enqueue(self, item):: Метод для добавления элемента в конец очереди.
+self.items.append(item): Добавление элемента в конец deque.
+def dequeue(self):: Метод для удаления и возврата элемента из начала очереди.
+if not self.is_empty():: Проверка, что очередь не пуста перед извлечением элемента.
+return self.items.popleft(): Удаление и возврат элемента из начала очереди.
+def is_empty(self):: Метод для проверки, пуста ли очередь.
+return len(self.items) == 0: Возвращает True, если очередь пуста, иначе False.
+def peek(self):: Метод для возврата элемента из начала очереди без его удаления.
+if not self.is_empty():: Проверка, что очередь не пуста перед возвратом элемента.
+return self.items[0]: Возврат элемента из начала очереди.
+def size(self):: Метод для возврата текущего размера очереди.
+return len(self.items): Возврат текущего размера очереди.

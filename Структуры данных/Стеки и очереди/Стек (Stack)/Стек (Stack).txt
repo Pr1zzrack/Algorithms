@@ -1,0 +1,58 @@
+Стек (Stack):
+
+Стек - это абстрактная структура данных, в которой 
+элементы добавляются и удаляются с одного конца, 
+называемого вершиной стека. Операции вставки элемента 
+в стек называются "пуш" (push), а операции извлечения - "поп" (pop). 
+Это принцип "последний вошел, первый вышел" (Last-In, First-Out, LIFO). 
+Примеры использования стеков включают управление вызовами функций 
+в программировании или хранение временных данных.
+
+
+код:
+    class Stack:
+        def __init__(self):
+            self.items = []
+
+        def push(self, item):
+            self.items.append(item)
+
+        def pop(self):
+            if not self.is_empty():
+                return self.items.pop()
+
+        def is_empty(self):
+            return len(self.items) == 0
+
+        def peek(self):
+            if not self.is_empty():
+                return self.items[-1]
+
+        def size(self):
+            return len(self.items)
+
+    # Пример использования
+    stack = Stack()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    print(stack.pop())  # Вывод: 3
+
+
+Объяснение:
+
+class Stack:: Определение класса Stack.
+def __init__(self):: Метод инициализации объекта класса (конструктор), создающий пустой стек.
+self.items = []: Создание списка для хранения элементов стека.
+def push(self, item):: Метод для добавления элемента в стек.
+self.items.append(item): Добавление элемента в конец списка.
+def pop(self):: Метод для удаления и возврата элемента из вершины стека.
+if not self.is_empty():: Проверка, что стек не пуст перед извлечением элемента.
+return self.items.pop(): Удаление и возврат верхнего элемента стека.
+def is_empty(self):: Метод для проверки, пуст ли стек.
+return len(self.items) == 0: Возвращает True, если стек пуст, иначе False.
+def peek(self):: Метод для возврата верхнего элемента стека без его удаления.
+if not self.is_empty():: Проверка, что стек не пуст перед возвратом верхнего элемента.
+return self.items[-1]: Возврат верхнего элемента стека.
+def size(self):: Метод для возврата текущего размера стека.
+return len(self.items): Возврат текущего размера стека.

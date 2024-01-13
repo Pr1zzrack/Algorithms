@@ -1,0 +1,116 @@
+2. Пирамидальная сортировка (Heap Sort)
+Преимущества:
+Сложность всегда O(n log n).
+Не требует дополнительной памяти.
+Недостатки:
+Неустойчивая сортировка.
+На практике часто медленнее, чем быстрая сортировка.
+Когда использовать:
+Когда нужна гарантированная сложность O(n log n), независимо от предварительного упорядочения данных.
+Пример: Сортируем массив [3, 1, 4, 1, 5, 9, 2]. Создаём из него двоичную кучу, затем извлекаем максимальные элементы и формируем отсортированный массив.
+
+Пример 1: Сортировка простого списка
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and arr[i] < arr[l]:
+        largest = l
+
+    if r < n and arr[largest] < arr[r]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heapSort(arr):
+    n = len(arr)
+
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+arr = [12, 11, 13, 5, 6, 7]
+heapSort(arr)
+print("Отсортированный массив:", arr)
+Объяснение:
+Этот код сортирует массив чисел с использованием пирамидальной сортировки. Функция heapify преобразует поддерево в двоичную кучу. Затем heapSort применяет heapify к каждому элементу, создавая кучу, после чего извлекает максимальные элементы, формируя отсортированный массив.
+
+Пример 2: Сортировка списка строк
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and arr[l] > arr[largest]:
+        largest = l
+
+    if r < n and arr[r] > arr[largest]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heapSort(arr):
+    n = len(arr)
+
+    for i in range(n, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+arr = ["banana", "apple", "cherry", "date"]
+heapSort(arr)
+print("Отсортированный массив:", arr)
+
+Объяснение:
+Этот пример показывает, как сортировать список строк. Методика аналогична сортировке чисел, но здесь сравниваются строки. Пирамидальная сортировка эффективно упорядочивает строки по алфавиту.
+
+Пример 3: Сортировка списка объектов по определенному атрибуту
+class Student:
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+    def __repr__(self):
+        return f"{self.name}: {self.grade}"
+
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and arr[l].grade > arr[largest].grade:
+        largest = l
+
+    if r < n and arr[r].grade > arr[largest].grade:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heapSort(arr):
+    n = len(arr)
+
+    for i in range(n, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+students = [Student("John", 86), Student("Jane", 91), Student("Dave", 88)]
+heapSort(students)
+print("Студенты, отсортированные по оценкам:", students)
+
+Объяснение:
+Этот пример демонстрирует пирамидальную сортировку списка объектов. Здесь мы создаем класс Student с атрибутами name и grade. Сортировка выполняется по оценкам студентов.

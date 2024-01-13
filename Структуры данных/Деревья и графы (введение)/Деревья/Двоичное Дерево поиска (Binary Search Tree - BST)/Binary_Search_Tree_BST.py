@@ -1,0 +1,35 @@
+class TreeNode:
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
+
+def insert(root, key):
+    if root is None:
+        return TreeNode(key)
+    else:
+        if root.val < key:
+            root.right = insert(root.right, key)
+        else:
+            root.left = insert(root.left, key)
+    return root
+
+# Пример использования
+root = None
+keys = [50, 30, 20, 40, 70, 60, 80]
+
+for key in keys:
+    root = insert(root, key)
+
+
+# Объяснение:
+
+# def insert(root, key):: Функция вставки элемента в дерево.
+# if root is None:: Если дерево пусто, создается новый узел.
+# return TreeNode(key): Создание нового узла.
+# else:: Если дерево не пусто, рекурсивно вызывается вставка для левого или правого поддерева.
+# if root.val < key:: Если ключ больше значения текущего узла, вставка в правое поддерево.
+# root.right = insert(root.right, key): Рекурсивный вызов вставки для правого поддерева.
+# else:: Если ключ меньше или равен значению текущего узла, вставка в левое поддерево.
+# root.left = insert(root.left, key): Рекурсивный вызов вставки для левого поддерева.
+# return root: Возврат обновленного узла.

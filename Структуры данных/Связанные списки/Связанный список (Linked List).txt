@@ -1,0 +1,101 @@
+Связанный список (Linked List):
+
+Связанный список - это структура данных, состоящая из узлов, 
+каждый из которых содержит данные и ссылку (или ссылки) 
+на следующий узел в последовательности. Связанные списки 
+позволяют эффективно добавлять и удалять элементы в середине списка.
+
+
+код:
+    class Node:
+        def __init__(self, data=None):
+            self.data = data
+            self.next = None
+
+    class LinkedList:
+        def __init__(self):
+            self.head = None
+
+        def is_empty(self):
+            return self.head is None
+
+        def append(self, data):
+            new_node = Node(data)
+            if self.is_empty():
+                self.head = new_node
+            else:
+                current = self.head
+                while current.next:
+                    current = current.next
+                current.next = new_node
+
+        def prepend(self, data):
+            new_node = Node(data)
+            new_node.next = self.head
+            self.head = new_node
+
+        def delete(self, data):
+            if self.is_empty():
+                return
+            if self.head.data == data:
+                self.head = self.head.next
+                return
+            current = self.head
+            while current.next and current.next.data != data:
+                current = current.next
+            if current.next:
+                current.next = current.next.next
+
+        def display(self):
+            current = self.head
+            while current:
+                print(current.data, end=" -> ")
+                current = current.next
+            print("None")
+
+    # Пример использования
+    linked_list = LinkedList()
+    linked_list.append(1)
+    linked_list.append(2)
+    linked_list.prepend(0)
+    linked_list.delete(1)
+    linked_list.display()  # Вывод: 0 -> 2 -> None
+
+
+Объяснение:
+
+class Node:: Определение класса Node, представляющего узел связанного списка.
+def __init__(self, data=None):: Конструктор класса Node, который инициализирует объект Node с данными data и указателем next, по умолчанию равным None.
+self.data = data: Присвоение значений данных узла.
+self.next = None: Инициализация указателя на следующий узел.
+class LinkedList:: Определение класса LinkedList.
+def __init__(self):: Конструктор класса LinkedList, который инициализирует пустой связанный список с начальной головой, равной None.
+self.head = None: Инициализация указателя на голову списка.
+def is_empty(self):: Метод для проверки, пуст ли связанный список.
+return self.head is None: Возвращает True, если голова списка равна None, что означает пустой список.
+def append(self, data):: Метод для добавления нового узла с данными data в конец связанного списка.
+new_node = Node(data): Создание нового узла.
+if self.is_empty():: Проверка, пуст ли список.
+self.head = new_node: Если список пуст, новый узел становится головой.
+else:: Если список не пуст, добавление нового узла в конец.
+current = self.head: Использование переменной current для перемещения по списку.
+while current.next:: Цикл для поиска конца списка.
+current.next = new_node: Добавление нового узла в конец списка.
+def prepend(self, data):: Метод для добавления нового узла с данными data в начало связанного списка.
+new_node = Node(data): Создание нового узла.
+new_node.next = self.head: Новый узел указывает на текущую голову.
+self.head = new_node: Новый узел становится новой головой списка.
+def delete(self, data):: Метод для удаления узла с данными data из связанного списка.
+if self.is_empty():: Проверка, пуст ли список.
+if self.head.data == data:: Проверка, является ли удаляемый узел головой.
+self.head = self.head.next: Удаление головы, если она соответствует удаляемому узлу.
+current = self.head: Использование переменной current для перемещения по списку.
+while current.next and current.next.data != data:: Поиск узла для удаления.
+if current.next:: Проверка, найден ли узел для удаления.
+current.next = current.next.next: Удаление узла.
+def display(self):: Метод для отображения содержимого связанного списка.
+current = self.head: Использование переменной current для перемещения по списку.
+while current:: Цикл для прохода по всем узлам.
+print(current.data, end=" -> "): Вывод данных текущего узла.
+current = current.next: Переход к следующему узлу.
+print("None"): Вывод "None" в конце списка.

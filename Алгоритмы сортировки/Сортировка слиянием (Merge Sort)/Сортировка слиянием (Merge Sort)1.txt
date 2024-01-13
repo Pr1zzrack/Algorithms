@@ -1,0 +1,56 @@
+Сортировка слиянием (Merge Sort):
+
+Разделяет массив пополам, рекурсивно сортирует каждую 
+половину, а затем объединяет их в отсортированный массив.
+
+
+код:
+    def merge_sort(arr):
+        if len(arr) > 1:
+            mid = len(arr) // 2
+            left_half = arr[:mid]
+            right_half = arr[mid:]
+
+            merge_sort(left_half)
+            merge_sort(right_half)
+
+            i = j = k = 0
+
+            while i < len(left_half) and j < len(right_half):
+                if left_half[i] < right_half[j]:
+                    arr[k] = left_half[i]
+                    i += 1
+                else:
+                    arr[k] = right_half[j]
+                    j += 1
+                k += 1
+
+            while i < len(left_half):
+                arr[k] = left_half[i]
+                i += 1
+                k += 1
+
+            while j < len(right_half):
+                arr[k] = right_half[j]
+                j += 1
+                k += 1
+
+    # Пример использования
+    arr = [64, 34, 25, 12, 22, 11, 90]
+    merge_sort(arr)
+    print("Отсортированный массив:", arr)
+
+
+Объяснение:
+
+def merge_sort(arr):: Объявление функции сортировки слиянием.
+if len(arr) > 1:: Проверка, нужно ли разбивать массив.
+mid = len(arr) // 2: Нахождение середины массива.
+left_half = arr[:mid]: Разделение массива на левую половину.
+right_half = arr[mid:]: Разделение массива на правую половину.
+merge_sort(left_half): Рекурсивный вызов для левой половины.
+merge_sort(right_half): Рекурсивный вызов для правой половины.
+i = j = k = 0: Инициализация индексов для объединения отсортированных подмассивов.
+while i < len(left_half) and j < len(right_half):: Объединение двух подмассивов в один.
+while i < len(left_half):: Добавление оставшихся элементов из левой половины.
+while j < len(right_half):: Добавление оставшихся элементов из правой половины.
